@@ -1,0 +1,88 @@
+.side-nav {
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  width: 5rem;
+  box-shadow: 1px 1px #0003;
+  display: flex;
+  background-color: #f8f9f9;
+  flex-direction: column;
+  transition: var(--transition-speed);
+}
+
+.side-nav:hover {
+  width: 15rem;
+}
+
+.side-nav:hover .side-nav-logo svg {
+  transform: rotate(-180deg);
+  margin-left: auto;
+}
+
+.side-nav:hover .side-nav-links p {
+  display: block;
+}
+
+.side-nav:hover .side-nav-logo h2 {
+  left: 0;
+  display: block;
+}
+
+.side-nav:hover .side-nav-links svg {
+  height: 1rem;
+}
+
+.side-nav-links {
+  padding: 0.5rem;
+  display: flex;
+  text-decoration: none;
+  color: #3a3a3a;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.side-nav-links:hover {
+  color: black;
+}
+
+.side-nav-links svg {
+  height: 1.3rem;
+  transition: var(--transition-speed);
+}
+
+.side-nav-logo {
+  font-weight: bold;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px #0003;
+}
+
+.side-nav-logo svg {
+  transform: rotate(0deg);
+  transition: var(--transition-speed);
+  height: 2rem;
+}
+
+.side-nav-links p{
+  display: none;
+}
+
+.side-nav-logo h2 {
+  display: none;
+  transition: var(--transition-speed);
+  position: absolute;
+  left: -999px;
+}
+
+.side-nav-logo {
+  display: flex;
+}
+
+.active {
+  background-color: rgb(225, 225, 225);
+  color: black;
+  font-weight: bolder;
+  border-right: solid 3px var(--bg-primary);
+}
