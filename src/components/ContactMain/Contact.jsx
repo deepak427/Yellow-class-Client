@@ -1,29 +1,44 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClose,
+  faEdit,
+  faCheck,
+  faCircle,
+  faCircleDot,
+} from "@fortawesome/free-solid-svg-icons";
 import { deleteContact, editContact } from "../../actions/contact";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-const Contact = ({ id, contactId, Contact }) => {
+const Contact = ({deleteContacts, setDeleteContacts, showAddBtnDelete, id, contactId, Contact }) => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(Contact.name);
   const [email, setEmail] = useState(Contact.contact);
+  const [checked, setChecked] = useState(false);
 
-  const handleEdit =() => {
-    dispatch(editContact(id, {
-      name, contact: email,
-      contactId
-    }))
-    setEdit(!edit)
-  }
+  const handleEdit = () => {
+    dispatch(
+      editContact(id, {
+        name,
+        contact: email,
+        contactId,
+      })
+    );
+    setEdit(!edit);
+  };
 
   const handleDelete = () => {
     dispatch(
       deleteContact(id, {
-        contactId,
+        contactIds: [contactId],
       })
     );
+  };
+
+  const handlechecked = () => {
+    setChecked(!checked);
+    setDeleteContacts([...deleteContacts, contactId ])
   };
 
   return (
@@ -79,15 +94,41 @@ const Contact = ({ id, contactId, Contact }) => {
           icon={faEdit}
         />
       )}
-      <FontAwesomeIcon
-        onClick={handleDelete}
-        style={{
-          padding: "0.5rem 0 0.5rem 2rem",
-          height: "1.2rem",
-          cursor: "pointer",
-        }}
-        icon={faClose}
-      />
+      {showAddBtnDelete ? (
+        <>
+          {checked ? (
+            <FontAwesomeIcon
+              onClick={handlechecked}
+              style={{
+                padding: "0.5rem 0 0.5rem 2rem",
+                height: "1.2rem",
+                cursor: "pointer",
+              }}
+              icon={faCircle}
+            />
+          ) : (
+            <FontAwesomeIcon
+              onClick={handlechecked}
+              style={{
+                padding: "0.5rem 0 0.5rem 2rem",
+                height: "1.2rem",
+                cursor: "pointer",
+              }}
+              icon={faCircleDot}
+            />
+          )}
+        </>
+      ) : (
+        <FontAwesomeIcon
+          onClick={handleDelete}
+          style={{
+            padding: "0.5rem 0 0.5rem 2rem",
+            height: "1.2rem",
+            cursor: "pointer",
+          }}
+          icon={faClose}
+        />
+      )}
     </div>
   );
 };
